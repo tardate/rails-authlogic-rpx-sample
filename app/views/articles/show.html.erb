@@ -1,0 +1,21 @@
+<% title "Article" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @article.name %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=h @article.description %>
+</p>
+
+<p>
+<%= link_to "Comments (#{@article.comments.count})", article_comments_path(@article) %>
+</p>
+
+<p>
+
+  <%= link_to "Edit", edit_article_path(@article) %> |
+  <%= link_to "Destroy", @article, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", articles_path %>
+</p>

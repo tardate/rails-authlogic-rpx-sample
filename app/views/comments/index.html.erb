@@ -1,0 +1,17 @@
+<% title "Comments" %>
+
+<table>
+  <tr>
+    <th>Description</th>
+  </tr>
+  <% for comment in @comments %>
+    <tr>
+      <td><%=h comment.description %></td>
+      <td><%= link_to "Show", article_comment_path(@article,comment)  %></td>
+      <td><%= link_to "Edit", edit_article_comment_path(@article,comment) %></td>
+      <td><%= link_to "Destroy", article_comment_path(@article,comment) , :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Comment", new_article_comment_path %></p>

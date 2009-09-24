@@ -1,0 +1,33 @@
+<% form_for @user do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+  <% if @user.new_record? %>
+  <%= rpx_popup( :link_text => ".. or register using RPX", :app_name => "rails-authlogic-rpx-sample", :return_url => user_sessions_url ) %> 
+  <% else %>
+  <% if @user.using_rpx? %>
+  <%= f.label "This account is enabled for RPX authentication" %>
+  <% else %>
+  <%= rpx_popup( :link_text => "Add RPX authentication for this account..", :app_name => "rails-authlogic-rpx-sample", :return_url => addrpxauth_url, :add_rpx => true ) %> 
+  <%  end %>
+  <% end %>
+
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+

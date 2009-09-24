@@ -1,0 +1,18 @@
+<% title "Sign In" %>
+
+<% form_for @user_session do |f| %>
+	<%= f.error_messages %>
+	<p>
+		<%= f.label :username %><br />
+		<%= f.text_field :username %>
+	</p>
+	<p>
+		<%= f.label :password %><br />
+		<%= f.password_field :password %>
+	</p>
+	<p><%= f.submit "Submit" %></p>
+<% end %>
+
+<h2>Or Sign In with RPX..</h2>
+<%= rpx_embed( :app_name => "rails-authlogic-rpx-sample", :return_url => user_sessions_url ) %> 
+
