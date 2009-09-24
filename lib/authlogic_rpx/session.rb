@@ -47,6 +47,7 @@ module AuthlogicRpx
 			def self.included(klass)
 				klass.class_eval do
 					attr_accessor :new_registration
+					attr_accessor :rpx_identifier
 					attr_accessor :added_rpx_identifier
 					attr_accessor :rpx_data
 					after_persisting :add_rpx_identifier, :if => :adding_rpx_identifier?
@@ -101,7 +102,6 @@ module AuthlogicRpx
 			def add_rpx_identifier
 				RPXNow.user_data(controller.params[:token]) {|raw|
 					self.added_rpx_identifier = raw['profile']['identifier']
-					#self.record.rpx_identifier  = added_rpx_identifier - violates AR validation
 				}
 			end
 			

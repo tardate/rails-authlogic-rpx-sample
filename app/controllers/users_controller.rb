@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
-  end
+	def new
+		@user = User.new
+	end
   
 	def create
 		@user = User.new(params[:user])
@@ -32,7 +32,10 @@ class UsersController < ApplicationController
 			end
 		end
 	end
-  
+
+	# This action has the special purpose of receiving an update of the RPX identity information
+	# for current user - to add RPX authentication to an existing non-RPX account.
+	# RPX only supports :post, so this cannot simply go to update method (:put)
 	def addrpxauth
 		@user = current_user
 		@user.save do  |result|

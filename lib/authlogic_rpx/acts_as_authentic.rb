@@ -59,9 +59,10 @@ module AuthlogicRpx
 			end
 			
 			def adding_rpx_identifier
-				return unless session_class.controller.current_user_session
-				added_rpx_identifier = session_class.controller.current_user_session.added_rpx_identifier
-				self.rpx_identifier = added_rpx_identifier unless added_rpx_identifier.blank?
+				return true unless session_class && session_class.controller && session_class.controller.current_user_session
+				new_rpx_id = session_class.controller.current_user_session.added_rpx_identifier
+				self.rpx_identifier = new_rpx_id unless new_rpx_id.blank?
+				return true
 			end
 			
 			# experimental - a feature of RPX paid accounts and not properly developed/tested yet
