@@ -1,2 +1,2 @@
 authlogic
-rpx_now
+grosser-rpx_now --lib rpx_now --source gems.github.com
