@@ -1,5 +1,7 @@
 class UserSessionsController < ApplicationController
-
+	before_filter :require_no_user, :only => [:new, :create]
+	before_filter :require_user, :except => [:new, :create]
+	
 	def new
 		@user_session = UserSession.new
 	end
@@ -20,7 +22,7 @@ class UserSessionsController < ApplicationController
 			else
 				if @user_session.registration_complete?
 					flash[:notice] = "Successfully signed in."
-					redirect_to articles_path
+					redirect_back_or_default articles_path
 				else
 					flash[:notice] = "Welcome back! Please complete required registration details before continuing.."
 					redirect_to edit_user_path( :current )

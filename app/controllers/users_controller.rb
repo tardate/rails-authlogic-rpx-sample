@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+	before_filter :require_no_user, :only => [:new, :create]
+	before_filter :require_user, :except => [:new, :create]
+
 	def new
 		@user = User.new
 	end
@@ -23,7 +26,7 @@ class UsersController < ApplicationController
 		@user.attributes = params[:user]
 		if @user.save
 			flash[:notice] = "Successfully updated user."
-			redirect_to articles_path
+			redirect_back_or_default articles_path
 		else
 			render :action => 'edit'
 		end
