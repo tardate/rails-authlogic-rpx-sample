@@ -14,9 +14,8 @@ module AuthlogicRpx
 		end
 
 		# helper to insert a link to pop-up RPX login
-		
 		# takes options hash:
-		#   * <tt>link_text:</tt> test to use in the link
+		#   * <tt>link_text:</tt> text to use in the link
 		#   * <tt>app_name:</tt> name of the application (will be prepended to RPX domain and used in RPX dialogues)
 		#   * <tt>return_url:</tt> url for the RPX callback (e.g. user_sessions_url)
 		#   * <tt>add_rpx:</tt> if true, requests RPX callback to add to current session. Else runs normal authentication process (default)
