@@ -12,9 +12,12 @@ private
 	# see https://rpxnow.com/docs#profile_data for the definition of available attributes
 	#
 #    def map_rpx_data
-#		# map core profile data
-#		self.attempted_record.email = @rpx_data['profile']['email'] if attempted_record.email.blank?
-#		self.attempted_record.username = @rpx_data['profile']['preferredUsername'] if attempted_record.username.blank?
+#		# map core profile data using authlogic indirect column names
+#		self.attempted_record.send("#{klass.login_field}=", @rpx_data['profile']['preferredUsername'] ) if attempted_record.send(klass.login_field).blank?
+#		self.attempted_record.send("#{klass.email_field}=", @rpx_data['profile']['email'] ) if attempted_record.send(klass.email_field).blank?
+#
+#		# map some other columns explicityl
+#		self.attempted_record.fullname = @rpx_data['profile']['displayName'] if attempted_record.fullname.blank?
 #
 #		if rpx_extended_info?
 #			# map some extended attributes

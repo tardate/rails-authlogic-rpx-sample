@@ -167,8 +167,8 @@ module AuthlogicRpx
 			# see https://rpxnow.com/docs#profile_data for the definition of available attributes
 			#
 			def map_rpx_data
-				self.attempted_record.email = @rpx_data['profile']['email'] if attempted_record.email.blank?
-				self.attempted_record.username = @rpx_data['profile']['preferredUsername'] if attempted_record.username.blank?
+				self.attempted_record.send("#{klass.login_field}=", @rpx_data['profile']['preferredUsername'] ) if attempted_record.send(klass.login_field).blank?
+				self.attempted_record.send("#{klass.email_field}=", @rpx_data['profile']['email'] ) if attempted_record.send(klass.email_field).blank?
 			end
 	
 		end
