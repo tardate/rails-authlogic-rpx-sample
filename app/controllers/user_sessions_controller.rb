@@ -13,24 +13,22 @@ class UserSessionsController < ApplicationController
 	#
 	def create
 		@user_session = UserSession.new(params[:user_session])
-		@user_session.save do |result|
-			if result
-				if @user_session.new_registration?
-					flash[:notice] = "Welcome! As a new user, please review your registration details before continuing.."
-					redirect_to edit_user_path( :current )
-				else
-					if @user_session.registration_complete?
-						flash[:notice] = "Successfully signed in."
-						redirect_to articles_path
-					else
-						flash[:notice] = "Welcome back! Please complete required registration details before continuing.."
-						redirect_to edit_user_path( :current )
-					end
-				end
+		if @user_session.save
+			if @user_session.new_registration?
+				flash[:notice] = "Welcome! As a new user, please review your registration details before continuing.."
+				redirect_to edit_user_path( :current )
 			else
-				flash[:error] = "Failed to login or register."
-				redirect_to new_user_session_path
+				if @user_session.registration_complete?
+					flash[:notice] = "Successfully signed in."
+					redirect_to articles_path
+				else
+					flash[:notice] = "Welcome back! Please complete required registration details before continuing.."
+					redirect_to edit_user_path( :current )
+				end
 			end
+		else
+			flash[:error] = "Failed to login or register."
+			redirect_to new_user_session_path
 		end
 	end
   

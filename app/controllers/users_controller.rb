@@ -5,13 +5,11 @@ class UsersController < ApplicationController
   
 	def create
 		@user = User.new(params[:user])
-		@user.save do |result|
-			if result
-				flash[:notice] = "Successfully registered user."
-				redirect_to articles_path
-			else
-				render :action => 'new'
-			end
+		if @user.save
+			flash[:notice] = "Successfully registered user."
+			redirect_to articles_path
+		else
+			render :action => 'new'
 		end
 	end
   
@@ -23,13 +21,11 @@ class UsersController < ApplicationController
 	def update
 		@user = current_user
 		@user.attributes = params[:user]
-		@user.save do  |result|
-			if result
-				flash[:notice] = "Successfully updated user."
-				redirect_to articles_path
-			else
-				render :action => 'edit'
-			end
+		if @user.save
+			flash[:notice] = "Successfully updated user."
+			redirect_to articles_path
+		else
+			render :action => 'edit'
 		end
 	end
 
@@ -38,13 +34,11 @@ class UsersController < ApplicationController
 	# RPX only supports :post, so this cannot simply go to update method (:put)
 	def addrpxauth
 		@user = current_user
-		@user.save do  |result|
-			if result
-				flash[:notice] = "Successfully added RPX authentication for this account."
-				redirect_to articles_path
-			else
-				render :action => 'edit'
-			end
+		if @user.save
+			flash[:notice] = "Successfully added RPX authentication for this account."
+			redirect_to articles_path
+		else
+			render :action => 'edit'
 		end
 	end
   
