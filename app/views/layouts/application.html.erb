@@ -12,7 +12,7 @@
 		<div id="user_nav">
 			<%= link_to "Home", root_path %> |
 			<% if current_user %>
-				<%= link_to "Profile", edit_user_path(:current) %> |
+				<%= link_to "Profile", user_path(:current) %> |
 				<%= link_to "Sign out", signout_path %>
 			<% else %>
 				<%= link_to "Register", new_user_path %> |

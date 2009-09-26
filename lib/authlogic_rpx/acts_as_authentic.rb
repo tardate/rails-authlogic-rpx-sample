@@ -48,10 +48,16 @@ module AuthlogicRpx
 				result
 			end
 
+			# test if account it using RPX authentication
 			def using_rpx?
 				!rpx_identifier.blank?
 			end
-			
+
+			# test if account it using normal password authentication
+			def using_password?
+				!send(crypted_password_field).blank?
+			end
+
 		private
 			
 			def validate_password_with_rpx?
@@ -59,9 +65,12 @@ module AuthlogicRpx
 			end
 			
 			def adding_rpx_identifier
-				return true unless session_class && session_class.controller && session_class.controller.current_user_session
-				new_rpx_id = session_class.controller.current_user_session.added_rpx_identifier
-				self.rpx_identifier = new_rpx_id unless new_rpx_id.blank?
+				return true unless session_class && session_class.controller
+				new_rpx_id = session_class.controller.session['added_rpx_identifier']	
+				unless new_rpx_id.blank?
+					session_class.controller.session['added_rpx_identifier'] = nil		
+					self.rpx_identifier = new_rpx_id 
+				end
 				return true
 			end
 			

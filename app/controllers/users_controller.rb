@@ -20,7 +20,11 @@ class UsersController < ApplicationController
 		@user = current_user
 		@user.valid?
 	end
-  
+
+	def show
+		@user = current_user
+	end
+ 
 	def update
 		@user = current_user
 		@user.attributes = params[:user]
@@ -39,7 +43,7 @@ class UsersController < ApplicationController
 		@user = current_user
 		if @user.save
 			flash[:notice] = "Successfully added RPX authentication for this account."
-			redirect_to articles_path
+			render :action => 'show'
 		else
 			render :action => 'edit'
 		end

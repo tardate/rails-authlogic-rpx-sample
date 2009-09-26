@@ -1,6 +1,11 @@
 class UserSessionsController < ApplicationController
-	before_filter :require_no_user, :only => [:new, :create]
-	before_filter :require_user, :except => [:new, :create]
+	before_filter :require_no_user, :only => [:create]
+	before_filter :require_user, :except => [:index, :new, :create]
+
+	def index
+		# this is where RPX will return to if the user cancelled the login process
+		redirect_to current_user ? root_url : new_user_session_url
+	end
 	
 	def new
 		@user_session = UserSession.new

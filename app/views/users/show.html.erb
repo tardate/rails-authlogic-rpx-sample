@@ -1,7 +1,20 @@
+<% title "Show User" %>
+
 <p>
-  <b>Login:</b>
-  <%=h @user.login %>
+  <b>Username:</b>
+  <%=h @user.username %>
+</p>
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
 </p>
 
-
-<%= link_to 'Edit', edit_user_path %>
+<p>
+  <b>Authentication:</b>
+<ul>
+  <li>Password authentication has <%= @user.using_password? ? "been enabled" : "<b>not</b> been enabled" %></li>
+  <li>RPX authentication has <%= @user.using_rpx? ? "been enabled" : "<b>not</b> been enabled" %></li>
+</ul>
+</p>
+  
+<%= link_to 'Edit', edit_user_path(:current) %>
