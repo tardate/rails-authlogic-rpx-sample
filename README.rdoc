@@ -2,156 +2,113 @@
 
 == Purpose
 
-Demonstrates the use of rails with Authlogic and Authlogic_RPX gems for authentication.
+Demonstrates the use of Rails with Authlogic and Authlogic_RPX gems for authentication. This sample is intended as a guide for developers who are interested in using Authlogic RPX authentication in their own applications.
+
+Authlogic_RPX is an Authlogic extension library that provides support for authentication using the RPX multi-authentication service offered by JanRain. To use RPX, you must first register your application at {RPX}[http://rpxnow.com/]. A free "Basic" account is available, in addition to paid enhanced versions. All work with Authlogic_RPX.
+  
 
 == Authlogic_RPX References
 
-* <b>Live Demonstration Site:</b> http://rails-authlogic-rpx-sample.heroku.com
-* <b>Demonstration site source repository:</b> http://github.com/tardate/rails-authlogic-rpx-sample
-*	<b>Authlogic_RPX gem repo:</b> http://github.com/tardate/authlogic_rpx
-* <b>Related blog post:</b> 
+*	<b>Authlogic_RPX gem repo:</b> [http://github.com/tardate/authlogic_rpx]
+*	<b>Authlogic_RPX issues and feedback:</b> [http://github.com/tardate/authlogic_rpx/issues]
 
-== Other Authlogic and RPX References
+The demonstration Rails application is where you can see Authlogic_RPX in action:
+* <b>Live Demonstration Site:</b> [http://rails-authlogic-rpx-sample.heroku.com]
+* <b>Demonstration site source repository:</b> [http://github.com/tardate/rails-authlogic-rpx-sample]
 
-*	<b>Authlogic documentation:</b> http://rdoc.info/projects/binarylogic/authlogic
-*	<b>Authlogic repo:</b> http://github.com/binarylogic/authlogic
-*	<b>RPX documentation:</b> https://rpxnow.com/docs
-*	<b>RPX_now gem repo:</b> http://github.com/grosser/rpx_now
+== Authlogic and RPX References
+
+*	<b>Authlogic documentation:</b> [http://rdoc.info/projects/binarylogic/authlogic]
+*	<b>Authlogic repo:</b> [http://github.com/binarylogic/authlogic]
+*	<b>RPX documentation:</b> [https://rpxnow.com/docs]
+*	<b>RPX_now gem repo:</b> [http://github.com/grosser/rpx_now]
+
 
 == Using Authlogic_RPX
 
-See the documentation provided with the gem at http://github.com/tardate/authlogic_rpx
+A full explanation of how to use Authlogic_RPX is included with the gem at [http://github.com/tardate/authlogic_rpx]. It would be useful to review this information first. The remainder of this document covers specific installation instructions for the sample, and highlights how various features are implemented in the sample.
 
 
-protecting controller actions
+== Features of the sample
+
+Here's a quick overview of what is in the sample, to give you an idea of where to go look and explore.
+
+The sample application is a little example of a catalogue of articles, with the ability to comment on an article. Listings of articles and comments are public, but to create or edit you must be logged in.
+
+The user management and authentication is handled by the following two domains in the application:
+  
+*  Users model, controller and associated views represent the registered application users. This model "acts_as_authentic".
+*  UserSession is the Authlogic session model and controller with associated views that handles authentication. The sample app supports both RPX authentication and conventional username-password authentication.
+
+Features that are demonstrated:
+  
+* Auto-registration via RPX (i.e. new users created automatically once they sign in via RPX)
+* Can register users with conventional username-password security (standard Authlogic support)
+* Users can add RPX authentication to conventional username-password accounts
+* Use of before_filter in controllers to restrict actions to authenticated users
 
 
-= STEP-BY-STEP (how the app was created)
 
-== 1. Install oauth gem
+== Installing and Running the Sample
 
-	gem install oauth
+You can download and run this sample locally. It assumes you have the following setup already:
 
-== 2. create the application shell
+* ruby and rails installed (rails 2.3.3 is used for the sample, but you should be able to use it with older versions without too much trouble)
+* git is not required to run the sample, but recommended if you want to work on authlogic enhancements or bugs
 
-	rails rails-twitter-oauth-sample
-	cd rails-twitter-oauth-sample
-	rake db:create
+Here are the basic steps:
+  
+==== 1. Obtain the sample 
 
-== 3. create a member scaffold
+You can download a zip package of the sample from {github}[http://github.com/tardate/rails-authlogic-rpx-sample/downloads]
 
-	ruby script/generate scaffold member twitter_id:integer screen_name:string token:string secret:string profile_image_url:string
+If you are using git, you can directly clone the sample repository:
 
-Member model updated to use screen_name as the key:
+  $ git clone git://github.com/tardate/rails-authlogic-rpx-sample.git
+  $ cd rails-authlogic-rpx-sample
 
-		def to_param
-			screen_name
-		end
-		
-== 4. Prepare the database
+Of course, if you are a github user, you can fork your own copy and work on that. 
 
-	rake db:migrate
+Whichever way you obtain the sample, unpack it if necessary and proceed from there.
 
-== 5. Create the oauth support in ./lib
+==== 2. Install the Authlogic gems
 
-twitter_oauth.rb
+The easiest way is to use the rake task in the project
 
-* Implements TwitterOauth class, which is a wrapper around the oauth gem, providing specific support for twitter.
-* As a design principle, the TwitterOauth class logs and re-raises any errors that occur; some custom error classes are defined to suit.
-* It includes implementations for many of the twitter api methods (but not all at this point)
-		
-oauth_system.rb
+  $ rake gems:install
 
-* A controller mixin module to provide twitter oauth support in an application.
-* Uses the TwitterOauth class for oauth functionality.
-* Works specifically with the Member ActiveRecord class to update/verify user details.
-* It includes wrappers for many of the twitter api methods, basically to reroute errors into the flash hash.
+==== 3. Prepare the database
 
+  $ rake db:migrate
+  
+==== 4. Obtain and set your RPX application key
+  
+To use RPX, you must first register your application at {RPX}[http://rpxnow.com/]. A free "Basic" account is available, in addition to paid enhanced versions. All work with Authlogic_RPX.
 
-== 6. Modify MembersController to use OAuth
+The sample application is configured to obtain the RPX API key from an envirnment key called RPX_API_KEY. How you set this will depend on your operating system. for example:
+  
+  $ RPX_API_KEY=13245_a_very_long_key_you_got_when_registering_at_rpxnow.com_12345
+  $ export RPX_API_KEY
 
-	# include the oauth_system mixin
-	include OauthSystem
-	# specify oauth to be on all user-specific actions
-	before_filter :oauth_login_required, :except => [ :callback, :signout, :index ]
+Or if you are deploying this to a hosted service, follow the service provider's instructions. For example, to set the key for a deployment at heroku:
+  
+  $ heroku config:add RPX_API_KEY=13245_a_very_long_key_you_got_when_registering_at_rpxnow.com_12345
+  
+   
+==== 5. Run!
 
-== 7. Specify routes
+Should be ready to go now!
 
-Map members resources
-Hook /members/callback method to module OauthSystem.callback
-	
-	map.resources :members,
-	  :collection => { :callback => :get }
-
-Hook /signout method to module OauthSystem.signout:
-	
-	map.signout '/signout', :controller => 'members', :action => 'signout'
-
-For the sample app, use MembersController.index as the landing page:
-	
-	map.root      :controller => "members"
-
-
-== 8. Customise views and controller methods for some basic functionality
-
-MembersController actions
-
-* index - a basic landing page
-* show - main page for logged-in user
-* partialfriends - xhr responder to render friends list
-* partialfollowers - xhr responder to render followers list 
-* partialmentions - xhr responder to render mentions list
-* partialdms - xhr responder to render direct messages list
-
-	
-== 9. Add rake task to demonstrate proxy-login
-
-See lib/tasks/test.rake:
-demo_proxy_login task connects as the last member and exercises the API a bit
-
-To execute:
-
-	rake demo_proxy_login
-
-== 10. Configuring twitter application keys
-
-Register your application at http://twitter.com/oauth_clients
-
-Be sure to select the following settings in the registration: 
-* Application Type = Browser
-* Callback URL = the fully qualified callback to your app e.g. http://rails-twitter-oauth-sample.heroku.com/members/callback
-* Default Access type = Read & Write (if you want to be able to do things like post status updates)
-* Use Twitter for login = yes
-
-Note the "application key" and "consumer secret" numbers that twitter generates - these are unique for your application
-and are required to complete the configuration.
-
-Add the twitter application key and consumer secret as operating system environment variables
-(TWOAUTH_KEY and TWOAUTH_SECRET respectively).
-
-Set your callback URL as operating system environment variable (TWOAUTH_CALLBACK).
- 
-Alternatively, you can edit config/environment.rb to set these directly.
-
-If you are using heroku, add the environment keys using the heroky utility (gem):
-
-	heroku config:add TWOAUTH_KEY=8N029N81 TWOAUTH_SECRET=9s83109d3+583493190 TWOAUTH_CALLBACK=http://rails-twitter-oauth-sample.heroku.com/members/callback
-	
-
-== 11. Testing the application locally
-
-When you register the application at twitter, you will specify a fully qualified callback URL
-e.g. http://rails-twitter-oauth-sample.heroku.com/members/callback
-
-This is the address that twitter sends users back to after the twitter authentication step.
-
-To test on a local development machine (not known on the web/in DNS as the domain name in the callback),
-you can simply add the registered domain to your hosts file (aliasing localhost) e.g.
-
-	127.0.0.1       rails-twitter-oauth-sample.heroku.com
-
-NB: most browsers will need to be restarted each time you change this,
-as the resolved name will have been cached if you have already used the address.
+  $ ruby script/server
+  => Booting WEBrick
+  => Rails 2.3.3 application starting on http://0.0.0.0:3000
+  => Call with -d to detach
+  => Ctrl-C to shutdown server
+  [2009-09-26 22:02:00] INFO  WEBrick 1.3.1
+  [2009-09-26 22:02:00] INFO  ruby 1.8.6 (2008-08-11) [i386-mswin32]
+  [2009-09-26 22:02:00] INFO  WEBrick::HTTPServer#start: pid=5044 port=3000
+  
+Now access the site at http://localhost:3000
 
 
 == Kudos and Kopywrite
