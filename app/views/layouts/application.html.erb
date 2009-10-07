@@ -20,7 +20,7 @@
 			<% else %>
 				<%= link_to "Register", new_user_path %> |
 				<%= link_to "Sign in", signin_path %> |
-				<%= rpx_popup( :link_text => "Register/Sign in with RPX..", :app_name => "rails-authlogic-rpx-sample", :return_url => user_sessions_url ) %> 
+				<%= rpx_popup( :link_text => "Register/Sign in with RPX..", :app_name => RPX_APP_NAME, :return_url => user_sessions_url ) %> 
 			<% end %>
 		</div>
 

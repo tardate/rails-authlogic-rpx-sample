@@ -18,12 +18,12 @@
   </p>
   <p>
   <% if @user.new_record? %>
-  <%= rpx_popup( :link_text => ".. or register using RPX", :app_name => "rails-authlogic-rpx-sample", :return_url => user_sessions_url ) %> 
+  <%= rpx_popup( :link_text => ".. or register using RPX", :app_name => RPX_APP_NAME, :return_url => user_sessions_url ) %> 
   <% else %>
   <% if @user.using_rpx? %>
   <%= f.label "This account is enabled for RPX authentication" %>
   <% else %>
-  <%= rpx_popup( :link_text => "Add RPX authentication for this account..", :app_name => "rails-authlogic-rpx-sample", :return_url => addrpxauth_url, :add_rpx => true ) %> 
+  <%= rpx_popup( :link_text => "Add RPX authentication for this account..", :app_name => RPX_APP_NAME, :return_url => addrpxauth_url, :add_rpx => true ) %> 
   <%  end %>
   <% end %>
 

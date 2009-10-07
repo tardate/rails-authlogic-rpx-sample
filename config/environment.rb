@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "authlogic"
   config.gem "grosser-rpx_now", :lib => "rpx_now", :source => 'http://gems.github.com'
-  config.gem "tardate-authlogic_rpx", :lib => "authlogic_rpx", :version => '>= 1.0.2', :source => 'http://gems.github.com'
+  config.gem "authlogic_rpx", :version => '>= 1.0.3', :source => 'http://gemcutter.org'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -43,4 +43,5 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
   
   RPX_API_KEY = ENV['RPX_API_KEY']
+  RPX_APP_NAME = 'rails-authlogic-rpx-sample'
 end

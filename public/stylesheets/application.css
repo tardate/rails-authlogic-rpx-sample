@@ -45,6 +45,9 @@ a {
 .fieldWithErrors {
   display: inline;
 }
+.fieldWithErrors input {
+    border: 2px solid #CF0000;
+}
 
 #errorExplanation {
   width: 400px;

@@ -94,7 +94,10 @@ Or if you are deploying this to a hosted service, follow the service provider's 
   
   $ heroku config:add RPX_API_KEY=13245_a_very_long_key_you_got_when_registering_at_rpxnow.com_12345
   
-   
+Update the RPX_APP_NAME constant in config/environment.rb to match the name you registered your application under at RPX:
+
+  RPX_APP_NAME = 'rails-authlogic-rpx-sample'
+  
 ==== 5. Run!
 
 Should be ready to go now!
