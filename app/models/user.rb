@@ -3,5 +3,7 @@ class User < ActiveRecord::Base
 		#c.map_id = false
 	end
 	attr_accessible :username, :email, :password, :password_confirmation, :rpx_identifier
+
+	validates_uniqueness_of   :username, :case_sensitive => false
 	
 end
