@@ -22,6 +22,7 @@
   <% else %>
   <% if @user.using_rpx? %>
   <%= f.label "This account is enabled for RPX authentication" %>
+  (<%= rpx_popup( :link_text => "change RPX authentication for this account", :app_name => RPX_APP_NAME, :return_url => addrpxauth_url, :add_rpx => true ) %> )
   <% else %>
   <%= rpx_popup( :link_text => "Add RPX authentication for this account..", :app_name => RPX_APP_NAME, :return_url => addrpxauth_url, :add_rpx => true ) %> 
   <%  end %>
