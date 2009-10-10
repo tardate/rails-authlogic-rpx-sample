@@ -16,5 +16,24 @@
   <li>RPX authentication has <%= @user.using_rpx? ? "been enabled" : "<b>not</b> been enabled" %></li>
 </ul>
 </p>
-  
+ 
+<p>
+  <b>Authlogic extended attributes:</b>
+<ul>
+  <li>  <b>login_count:</b>  <%=h @user.login_count %></li>
+  <li>  <b>last_request_at:</b>  <%=h @user.last_request_at %></li>
+  <li>  <b>last_login_at:</b>  <%=h @user.last_login_at %></li>
+  <li>  <b>current_login_at:</b>  <%=h @user.current_login_at %></li>
+  <li>  <b>last_login_ip:</b>  <%=h @user.last_login_ip %></li>
+  <li>  <b>current_login_ip:</b>  <%=h @user.current_login_ip %></li>
+</ul>
+</p>
+
+<p>
+  <b>Additional profile fields (automatically updated from RPX):</b>
+<ul>
+  <li><b>photo_url:</b>  <%=h @user.photo_url %></li>
+</ul>
+</p>
+
 <%= link_to 'Edit', edit_user_path(:current) %>
