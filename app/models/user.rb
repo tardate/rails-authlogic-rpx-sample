@@ -18,7 +18,7 @@ private
 		self.rpx_identifier = rpx_data['profile']['identifier']
 
 		# map some additional fields, e.g. photo_url
-		self.photo_url = @rpx_data['profile']['photo'] if photo_url.blank?
+		self.photo_url = rpx_data['profile']['photo'] if photo_url.blank?
 	end
 			
 end
