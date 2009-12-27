@@ -113,6 +113,25 @@ Should be ready to go now!
   
 Now access the site at http://localhost:3000
 
+=== Using the sample to test a development release of authlogic_rpx
+
+If you want to test modifications to the Authlogic_RPX gem you can make some changes to this sample
+to get it to load from your Authlogic_RPX development sources instead of the installed gem.
+
+Try this:
+
+1. Replace the authlogic_rpx config.gem with a load_paths specification in config/environment.rb:
+
+	#config.gem 'authlogic_rpx', :version => '>= 1.1.0', :source => 'http://gemcutter.org'
+	config.load_paths += %W( /experimental/authlogic_rpx/lib )
+
+2. add an initializer to require authlogic_rpx. Create config/initializers/authlogic_rpx_test.rb containing:
+
+	require 'authlogic_rpx'
+
+3. Restart the server. The application will now be loading authlogic_rpx from the filesystem path you
+specified with config.load_paths instead of from an installed gem.
+
 
 == Kudos and Kopywrite
 
