@@ -17,6 +17,17 @@
 </ul>
 </p>
  
+<% if @user.using_rpx? %> 
+ <p>
+  <b>RPX Authentication Providers:</b>
+<ul>
+<% @user.rpx_identifiers.each do |identifier| %>
+  <li>Provider: <%= identifier.provider_name %>, ID: <%= identifier.identifier %></li>
+<% end %>
+</ul>
+</p>
+<% end %>
+
 <p>
   <b>Authlogic extended attributes:</b>
 <ul>
