@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
     @article = Article.find(params[:article_id])
     @comment = Comment.new(params[:comment])
 	@comment.article = @article
+	@comment.user = current_user
     if @comment.save
       flash[:notice] = "Successfully created comment."
       redirect_to article_path(@article)

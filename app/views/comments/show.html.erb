@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Created by:</strong>
+  <%=h @comment.user.username if @comment.user %>
+</p>
+
+<p>
   <%= link_to "Edit", edit_article_comment_path(@article,@comment) %> |
   <%= link_to "Destroy", article_comment_path(@article,@comment) , :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", article_comments_path(@article,nil) %>

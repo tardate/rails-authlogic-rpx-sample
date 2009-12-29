@@ -10,6 +10,11 @@
 </p>
 
 <p>
+  <strong>Created by:</strong>
+  <%=h @article.user.username if @article.user %>
+</p>
+
+<p>
 <%= link_to "Comments (#{@article.comments.count})", article_comments_path(@article) %>
 </p>
 

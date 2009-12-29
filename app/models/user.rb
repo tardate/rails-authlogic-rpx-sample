@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
 	attr_accessible :username, :email, :password, :password_confirmation, :rpx_identifier
 
 	validates_uniqueness_of   :username, :case_sensitive => false
+
+	has_many :articles
+	has_many :comments
 	
 private
 
@@ -28,7 +31,9 @@ private
 	# By default, it does not merge any other details (e.g. application data ownership)
 	#
 	def before_merge_rpx_data( from_user, to_user )
-		RAILS_DEFAULT_LOGGER.info "in before_merge_rpx_data"
+		RAILS_DEFAULT_LOGGER.info "in before_merge_rpx_data: migrate articles and comments from #{from_user.username} to #{to_user.username}"
+		to_user.articles << from_user.articles
+		to_user.comments << from_user.comments
 	end
 	
 	# after_merge_rpx_data provides a hook for application developers to perform account clean-up after authlogic_rpx has
@@ -37,7 +42,8 @@ private
 	# By default, does nothing. It could, for example, be used to delete or disable the 'from_user' account
 	#
 	def after_merge_rpx_data( from_user, to_user )
-		RAILS_DEFAULT_LOGGER.info "in after_merge_rpx_data"	
+		RAILS_DEFAULT_LOGGER.info "in after_merge_rpx_data: destroy #{from_user.inspect}"	
+		from_user.destroy
 	end
 
 end
