@@ -14,19 +14,20 @@
 <ul>
   <li>Password authentication has <%= @user.using_password? ? "been enabled" : "<b>not</b> been enabled" %></li>
   <li>RPX authentication has <%= @user.using_rpx? ? "been enabled" : "<b>not</b> been enabled" %></li>
+  <li>RPX account merging enabled?: <%= @user.class.account_merge_enabled_value %></li>
+  <li>RPX selected mapping mode: <%= @user.class.account_mapping_mode_value %></li>
+  <li>RPX mapping mode in use: <%= @user.class.account_mapping_mode_used %></li>
 </ul>
 </p>
  
-<% if @user.using_rpx? %> 
  <p>
   <b>RPX Authentication Providers:</b>
 <ul>
 <% @user.rpx_identifiers.each do |identifier| %>
-  <li>Provider: <%= identifier.provider_name %>, ID: <%= identifier.identifier %></li>
+  <li>Provider: <%= identifier[:provider_name] %>, ID: <%= identifier[:identifier] %></li>
 <% end %>
 </ul>
 </p>
-<% end %>
 
 <p>
   <b>Authlogic extended attributes:</b>
