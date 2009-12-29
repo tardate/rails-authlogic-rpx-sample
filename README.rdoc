@@ -2,7 +2,7 @@
 
 == Purpose
 
-Demonstrates the use of Rails with Authlogic and Authlogic_RPX gems for authentication. This sample is intended as a guide for developers who are interested in using Authlogic RPX authentication in their own applications.
+Demonstrates the use of Rails with Authlogic and Authlogic_RPX gems for authentication. This sample is intended as a guide for developers who are interested in using Authlogic_RPX authentication in their own applications.
 
 Authlogic_RPX is an Authlogic extension library that provides support for authentication using the RPX multi-authentication service offered by JanRain. To use RPX, you must first register your application at {RPX}[http://rpxnow.com/]. A free "Basic" account is available, in addition to paid enhanced versions. All work with Authlogic_RPX.
   
@@ -46,14 +46,14 @@ Features that are demonstrated:
 * Can register users with conventional username-password security (standard Authlogic support)
 * Users can add RPX authentication to conventional username-password accounts
 * Use of before_filter in controllers to restrict actions to authenticated users
-
+* Account mapping (Authlogic_RPX :internal mode) and account merging
 
 
 == Installing and Running the Sample
 
 You can download and run this sample locally. It assumes you have the following setup already:
 
-* ruby and rails installed (rails 2.3.3 is used for the sample, but you should be able to use it with older versions without too much trouble)
+* ruby and rails installed (rails 2.3.3 is used for the sample, but you should be able to use it with newer or older versions without too much trouble)
 * git is not required to run the sample, but recommended if you want to work on authlogic enhancements or bugs
 
 Here are the basic steps:
@@ -142,3 +142,4 @@ The idea of adding RPX support to authlogic is not new. Some early ideas were fo
 *	<b>http://github.com/gampleman/authlogic_rpx/</b> similar, but including an implementation of the RPX api
 
 authlogic_rpx was created by Paul Gallagher (tardate.com) and released under the MIT license.
+Big thanks for contributions from {John}[http://gitub.com/jjb] and {Damir}[http://gitub.com/sidonath]
