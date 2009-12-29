@@ -1,9 +1,9 @@
 class AddAuthlogicRpxMigration < ActiveRecord::Migration
   def self.up
     create_table :rpx_identifiers do |t|
-      t.string  :identifier
+      t.string  :identifier, :null => false
       t.string  :provider_name
-      t.integer :user_id
+      t.integer :user_id, :null => false
       t.timestamps
     end
     add_index :rpx_identifiers, :identifier, :unique => true, :null => false
