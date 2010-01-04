@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(:version => 20091229052448) do
   end
 
   create_table "rpx_identifiers", :force => true do |t|
-    t.string   "identifier"
+    t.string   "identifier",    :null => false
     t.string   "provider_name"
-    t.integer  "user_id"
+    t.integer  "user_id",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
