@@ -20,8 +20,8 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem 'authlogic', :version => '>= 2.1.3'
-  config.gem 'rpx_now', :version => '>= 0.6.11', :source => 'http://gemcutter.org'
-  config.gem 'authlogic_rpx', :version => '>= 1.1.0', :source => 'http://gemcutter.org'
+  config.gem 'rpx_now', :version => '>= 0.6.12', :source => 'http://gemcutter.org'
+  config.gem 'authlogic_rpx', :version => '>= 1.1.1', :source => 'http://gemcutter.org'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
