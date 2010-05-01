@@ -1,12 +1,13 @@
 class User < ActiveRecord::Base
 	acts_as_authentic do |c|
+		c.login_field :nickname
 		c.account_mapping_mode :auto
 		c.account_merge_enabled true
 	end
 	
-	attr_accessible :username, :email, :password, :password_confirmation, :rpx_identifier
+	attr_accessible :nickname, :email, :password, :password_confirmation, :rpx_identifier
 
-	validates_uniqueness_of   :username, :case_sensitive => false
+	validates_uniqueness_of   :nickname, :case_sensitive => false
 
 	has_many :articles
 	has_many :comments
@@ -31,7 +32,7 @@ private
 	# By default, it does not merge any other details (e.g. application data ownership)
 	#
 	def before_merge_rpx_data( from_user, to_user )
-		RAILS_DEFAULT_LOGGER.info "in before_merge_rpx_data: migrate articles and comments from #{from_user.username} to #{to_user.username}"
+		RAILS_DEFAULT_LOGGER.info "in before_merge_rpx_data: migrate articles and comments from #{from_user.nickname} to #{to_user.nickname}"
 		to_user.articles << from_user.articles
 		to_user.comments << from_user.comments
 	end

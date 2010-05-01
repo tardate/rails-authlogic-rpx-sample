@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091229052448) do
+ActiveRecord::Schema.define(:version => 20100501095025) do
 
   create_table "articles", :force => true do |t|
     t.string   "name"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20091229052448) do
   add_index "rpx_identifiers", ["user_id"], :name => "index_rpx_identifiers_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "username"
     t.string   "email"
     t.string   "crypted_password"
     t.string   "password_salt"
@@ -54,8 +53,10 @@ ActiveRecord::Schema.define(:version => 20091229052448) do
     t.string   "last_login_ip"
     t.string   "current_login_ip"
     t.string   "photo_url"
+    t.string   "nickname"
   end
 
+  add_index "users", ["nickname"], :name => "index_users_on_nickname"
   add_index "users", ["rpx_identifier"], :name => "index_users_on_rpx_identifier"
 
 end
