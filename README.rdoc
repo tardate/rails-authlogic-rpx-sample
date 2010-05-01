@@ -98,6 +98,11 @@ Update the RPX_APP_NAME constant in config/environment.rb to match the name you 
 
   RPX_APP_NAME = 'rails-authlogic-rpx-sample'
   
+Important!
+  
+* One of the most common mistakes made when trying to setup the sample is NOT SETTING the RPX_APP_NAME to the application you registered at rpxnow.com. If you do this, you will get an authorization failure.
+* Make sure the application name is in lowercase. A mixed-case name can result in SSL certificate warning errors in some browsers (notably Android webkit)
+  
 ==== 5. Run!
 
 Should be ready to go now!
