@@ -125,6 +125,9 @@ Try this:
 	#config.gem 'authlogic_rpx', :version => '>= 1.1.0', :source => 'http://gemcutter.org'
 	config.load_paths += %W( /experimental/authlogic_rpx/lib )
 
+	# or if you are running on windows:
+	config.load_paths += %W( c:\\experimental\\authlogic_rpx\\lib )
+
 2. add an initializer to require authlogic_rpx. Create config/initializers/authlogic_rpx_test.rb containing:
 
 	require 'authlogic_rpx'
