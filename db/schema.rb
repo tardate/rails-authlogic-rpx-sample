@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20091229052448) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "noob_id"
   end
 
   create_table "comments", :force => true do |t|
@@ -24,21 +24,10 @@ ActiveRecord::Schema.define(:version => 20091229052448) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "noob_id"
   end
 
-  create_table "rpx_identifiers", :force => true do |t|
-    t.string   "identifier",    :null => false
-    t.string   "provider_name"
-    t.integer  "user_id",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rpx_identifiers", ["identifier"], :name => "index_rpx_identifiers_on_identifier", :unique => true
-  add_index "rpx_identifiers", ["user_id"], :name => "index_rpx_identifiers_on_user_id"
-
-  create_table "users", :force => true do |t|
+  create_table "noobs", :force => true do |t|
     t.string   "username"
     t.string   "email"
     t.string   "crypted_password"
@@ -56,6 +45,17 @@ ActiveRecord::Schema.define(:version => 20091229052448) do
     t.string   "photo_url"
   end
 
-  add_index "users", ["rpx_identifier"], :name => "index_users_on_rpx_identifier"
+  add_index "noobs", ["rpx_identifier"], :name => "index_noobs_on_rpx_identifier"
+
+  create_table "rpx_identifiers", :force => true do |t|
+    t.string   "identifier",    :null => false
+    t.string   "provider_name"
+    t.integer  "noob_id",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rpx_identifiers", ["identifier"], :name => "index_rpx_identifiers_on_identifier", :unique => true
+  add_index "rpx_identifiers", ["noob_id"], :name => "index_rpx_identifiers_on_noob_id"
 
 end

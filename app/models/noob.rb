@@ -1,5 +1,6 @@
-class User < ActiveRecord::Base
+class Noob < ActiveRecord::Base
 	acts_as_authentic do |c|
+		c.session_class UserSession
 		c.account_mapping_mode :auto
 		c.account_merge_enabled true
 	end

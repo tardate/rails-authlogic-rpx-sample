@@ -1,11 +1,11 @@
 class AddObjectOwnership < ActiveRecord::Migration
   def self.up
-	add_column :articles, :user_id, :integer
-	add_column :comments, :user_id, :integer
+	add_column :articles, :noob_id, :integer
+	add_column :comments, :noob_id, :integer
   end
 
   def self.down
-	remove_column :articles, :user_id
-	remove_column :comments, :user_id
+	remove_column :articles, :noob_id
+	remove_column :comments, :noob_id
   end
 end

@@ -3,11 +3,11 @@ class AddAuthlogicRpxMigration < ActiveRecord::Migration
     create_table :rpx_identifiers do |t|
       t.string  :identifier, :null => false
       t.string  :provider_name
-      t.integer :user_id, :null => false
+      t.integer :noob_id, :null => false
       t.timestamps
     end
     add_index :rpx_identifiers, :identifier, :unique => true, :null => false
-    add_index :rpx_identifiers, :user_id, :unique => false, :null => false
+    add_index :rpx_identifiers, :noob_id, :unique => false, :null => false
     
     # == Customisation may be required here ==
     # You may need to remove database constraints on other fields if they will be unused in the RPX case

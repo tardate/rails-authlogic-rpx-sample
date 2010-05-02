@@ -1,5 +1,6 @@
 class UserSession < Authlogic::Session::Base
 	#auto_register false
+	authenticate_with Noob
 	rpx_key RPX_API_KEY
 	rpx_extended_info
 	

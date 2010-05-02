@@ -1,14 +1,14 @@
-class UsersController < ApplicationController
+class NoobsController < ApplicationController
 	before_filter :require_no_user, :only => [:new, :create]
 	before_filter :require_user, :except => [:new, :create]
 
 	def new
-		@user = User.new
+		@noob = Noob.new
 	end
   
 	def create
-		@user = User.new(params[:user])
-		if @user.save
+		@noob = Noob.new(params[:noob])
+		if @noob.save
 			flash[:notice] = "Successfully registered user."
 			redirect_to articles_path
 		else
@@ -17,18 +17,18 @@ class UsersController < ApplicationController
 	end
   
 	def edit
-		@user = current_user
-		@user.valid?
+		@noob = current_user
+		@noob.valid?
 	end
 
 	def show
-		@user = current_user
+		@noob = current_user
 	end
  
 	def update
-		@user = current_user
-		@user.attributes = params[:user]
-		if @user.save
+		@noob = current_user
+		@noob.attributes = params[:noob]
+		if @noob.save
 			flash[:notice] = "Successfully updated user."
 			redirect_back_or_default articles_path
 		else
@@ -40,8 +40,8 @@ class UsersController < ApplicationController
 	# for current user - to add RPX authentication to an existing non-RPX account.
 	# RPX only supports :post, so this cannot simply go to update method (:put)
 	def addrpxauth
-		@user = current_user
-		if @user.save
+		@noob = current_user
+		if @noob.save
 			flash[:notice] = "Successfully added RPX authentication for this account."
 			render :action => 'show'
 		else

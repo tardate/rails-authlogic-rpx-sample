@@ -1,0 +1,51 @@
+<% title "Show User" %>
+
+<p>
+  <b>Username:</b>
+  <%=h @noob.username %>
+</p>
+<p>
+  <b>Email:</b>
+  <%=h @noob.email %>
+</p>
+
+<p>
+  <b>Authentication:</b>
+<ul>
+  <li>Password authentication has <%= @noob.using_password? ? "been enabled" : "<b>not</b> been enabled" %></li>
+  <li>RPX authentication has <%= @noob.using_rpx? ? "been enabled" : "<b>not</b> been enabled" %></li>
+  <li>RPX account merging enabled?: <%= @noob.class.account_merge_enabled_value %></li>
+  <li>RPX selected mapping mode: <%= @noob.class.account_mapping_mode_value %></li>
+  <li>RPX mapping mode in use: <%= @noob.class.account_mapping_mode_used %></li>
+</ul>
+</p>
+ 
+ <p>
+  <b>RPX Authentication Providers:</b>
+<ul>
+<% @noob.rpx_identifiers.each do |identifier| %>
+  <li>Provider: <%= identifier[:provider_name] %>, ID: <%= identifier[:identifier] %></li>
+<% end %>
+</ul>
+</p>
+
+<p>
+  <b>Authlogic extended attributes:</b>
+<ul>
+  <li>  <b>login_count:</b>  <%=h @noob.login_count %></li>
+  <li>  <b>last_request_at:</b>  <%=h @noob.last_request_at %></li>
+  <li>  <b>last_login_at:</b>  <%=h @noob.last_login_at %></li>
+  <li>  <b>current_login_at:</b>  <%=h @noob.current_login_at %></li>
+  <li>  <b>last_login_ip:</b>  <%=h @noob.last_login_ip %></li>
+  <li>  <b>current_login_ip:</b>  <%=h @noob.current_login_ip %></li>
+</ul>
+</p>
+
+<p>
+  <b>Additional profile fields (automatically updated from RPX):</b>
+<ul>
+  <li><b>photo_url:</b>  <%=h @noob.photo_url %></li>
+</ul>
+</p>
+
+<%= link_to 'Edit', edit_noob_path(:current) %>

@@ -3,7 +3,7 @@ class UserSessionsController < ApplicationController
 
 	def index
 		# this is where RPX will return to if the user cancelled the login process
-		redirect_to current_user ? root_url : new_user_session_url
+		redirect_to current_user ? root_url : new_noob_session_url
 	end
 	
 	def new
@@ -22,14 +22,14 @@ class UserSessionsController < ApplicationController
 		if @user_session.save
 			if @user_session.new_registration?
 				flash[:notice] = "Welcome! As a new user, please review your registration details before continuing.."
-				redirect_to edit_user_path( :current )
+				redirect_to edit_noob_path( :current )
 			else
 				if @user_session.registration_complete?
 					flash[:notice] = "Successfully signed in."
 					redirect_back_or_default articles_path
 				else
 					flash[:notice] = "Welcome back! Please complete required registration details before continuing.."
-					redirect_to edit_user_path( :current )
+					redirect_to edit_noob_path( :current )
 				end
 			end
 		else

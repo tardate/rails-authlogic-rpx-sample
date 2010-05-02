@@ -1,4 +1,4 @@
-<% form_for @user do |f| %>
+<% form_for @noob do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :username %><br />
@@ -17,10 +17,10 @@
     <%= f.password_field :password_confirmation %>
   </p>
   <p>
-  <% if @user.new_record? %>
+  <% if @noob.new_record? %>
   <%= rpx_popup( :link_text => ".. or register using RPX", :app_name => RPX_APP_NAME, :return_url => user_sessions_url, :unobtrusive => false ) %> 
   <% else %>
-  <% if @user.using_rpx? %>
+  <% if @noob.using_rpx? %>
   <%= f.label "This account is enabled for RPX authentication" %>
   (<%= rpx_popup( :link_text => "Add another RPX authentication provider to this account", :app_name => RPX_APP_NAME, :return_url => addrpxauth_url, :add_rpx => true, :unobtrusive => false ) %> )
   <% else %>
