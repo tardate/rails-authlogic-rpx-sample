@@ -53,7 +53,7 @@ Features that are demonstrated:
 
 You can download and run this sample locally. It assumes you have the following setup already:
 
-* ruby and rails installed (rails 2.3.3 is used for the sample, but you should be able to use it with newer or older versions without too much trouble. It has been tested with rails 2.3.4 and 2.3.5)
+* ruby and rails installed (rails 2.3.5 is used for the sample, but you should be able to use it with newer or older versions without too much trouble. It has been tested from rails 2.3.3 on)
 * git is not required to run the sample, but recommended if you want to work on authlogic enhancements or bugs
 
 Here are the basic steps:
