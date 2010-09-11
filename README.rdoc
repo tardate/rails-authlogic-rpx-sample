@@ -4,7 +4,7 @@
 
 Demonstrates the use of Rails with Authlogic and Authlogic_RPX gems for authentication. This sample is intended as a guide for developers who are interested in using Authlogic_RPX authentication in their own applications.
 
-Authlogic_RPX is an Authlogic extension library that provides support for authentication using the RPX multi-authentication service offered by JanRain. To use RPX, you must first register your application at {RPX}[http://rpxnow.com/]. A free "Basic" account is available, in addition to paid enhanced versions. All work with Authlogic_RPX.
+Authlogic_RPX is an Authlogic extension library that provides support for authentication using the Janrain Engage (formerly RPX) multi-authentication service offered by JanRain. To use RPX, you must first register your application at {Janrain Engage}[http://rpxnow.com/]. A free "Basic" account is available, in addition to paid enhanced versions. All work with Authlogic_RPX.
   
 
 == Authlogic_RPX References
@@ -81,22 +81,23 @@ The easiest way is to use the rake task in the project
 
   $ rake db:migrate
   
-==== 4. Obtain and set your RPX application key
+==== 4. Obtain and set your Janrain Engage/RPX application key
   
-To use RPX, you must first register your application at {RPX}[http://rpxnow.com/]. A free "Basic" account is available, in addition to paid enhanced versions. All work with Authlogic_RPX.
+To use Janrain Engage/RPX, you must first register your application at {Janrain Engage}[http://rpxnow.com/]. A free "Basic" account is available, in addition to paid enhanced versions. All work with Authlogic_RPX.
 
-The sample application is configured to obtain the RPX API key from an envirnment key called RPX_API_KEY. How you set this will depend on your operating system. for example:
+The sample application is configured to obtain the RPX API key and application name from environment keys called RARS_RPX_API_KEY and RARS_RPX_APP_NAME respectively. How you set this will depend on your operating system. for example:
   
-  $ RPX_API_KEY=13245_a_very_long_key_you_got_when_registering_at_rpxnow.com_12345
-  $ export RPX_API_KEY
+  $ RARS_RPX_API_KEY=13245_a_very_long_key_you_got_when_registering_at_rpxnow.com_12345
+  $ export RARS_RPX_API_KEY
+  $ RARS_RPX_APP_NAME=the_application_name_you_registered_at_rpxnow.com
+  $ export RARS_RPX_APP_NAME
+
 
 Or if you are deploying this to a hosted service, follow the service provider's instructions. For example, to set the key for a deployment at heroku:
   
-  $ heroku config:add RPX_API_KEY=13245_a_very_long_key_you_got_when_registering_at_rpxnow.com_12345
+  $ heroku config:add RARS_RPX_API_KEY=13245_a_very_long_key_you_got_when_registering_at_rpxnow.com_12345
   
-Update the RPX_APP_NAME constant in config/environment.rb to match the name you registered your application under at RPX:
 
-  RPX_APP_NAME = 'rails-authlogic-rpx-sample'
   
 ==== 5. Run!
 

@@ -19,8 +19,8 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem 'authlogic', :version => '>= 2.1.3'
-  config.gem 'rpx_now', :version => '>= 0.6.12', :source => 'http://gemcutter.org'
+  config.gem 'authlogic', :version => '= 2.1.6'
+  config.gem 'rpx_now', :version => '= 0.6.23', :source => 'http://gemcutter.org'
   config.gem 'authlogic_rpx', :version => '>= 1.1.1', :source => 'http://gemcutter.org'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
@@ -42,6 +42,9 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
   
-  RPX_API_KEY = ENV['RPX_API_KEY']
-  RPX_APP_NAME = 'rails-authlogic-rpx-sample'
+  RPX_API_KEY = ENV['RARS_RPX_API_KEY']
+  RPX_APP_NAME = ENV['RARS_RPX_APP_NAME']
+  raise "RPX/Janrain Engage API key must be defined ENV['RARS_RPX_API_KEY']" unless RPX_API_KEY
+  raise "RPX/Janrain Engage Application Name must be defined ENV['RARS_RPX_APP_NAME']" unless RPX_APP_NAME
+  
 end
