@@ -1,7 +1,22 @@
 <% title "Sign In" %>
 
-<% form_for @user_session do |f| %>
-	<%= f.error_messages %>
+<!-- 
+TODO: There is a problem with "form_for @user_session" in authlogic+rails 3 that I haven't been able to figure out yet.
+The derived url is incorrect. This appears to be an authlogic limitation yet to be fixed. 
+For now, cheat by explicitly setting the url
+-->
+<%= form_for :user_session, :url => user_sessions_path do |f| %>
+  <% if @user_session.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_session.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @user_session.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 	<p>
 		<%= f.label :username %><br />
 		<%= f.text_field :username %>
