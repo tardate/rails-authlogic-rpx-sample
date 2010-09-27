@@ -5,6 +5,7 @@
     <title><%= h(yield(:title) || "Untitled") %></title>
     <%= stylesheet_link_tag 'application' %>
     <%= yield(:head) %>
+    <%= csrf_meta_tag %>
   </head>
   <body>
     <div id="container">
