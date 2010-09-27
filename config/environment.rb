@@ -20,8 +20,8 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem 'authlogic', :version => '= 2.1.6'
-  config.gem 'rpx_now', :version => '= 0.6.23', :source => 'http://gemcutter.org'
-  config.gem 'authlogic_rpx', :version => '>= 1.1.1', :source => 'http://gemcutter.org'
+  config.gem 'rpx_now', :version => '= 0.6.23'
+  config.gem 'authlogic_rpx', :version => '>= 1.2.0'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -46,5 +46,5 @@ Rails::Initializer.run do |config|
   RPX_APP_NAME = ENV['RARS_RPX_APP_NAME']
   raise "RPX/Janrain Engage API key must be defined ENV['RARS_RPX_API_KEY']" unless RPX_API_KEY
   raise "RPX/Janrain Engage Application Name must be defined ENV['RARS_RPX_APP_NAME']" unless RPX_APP_NAME
-  
+
 end
