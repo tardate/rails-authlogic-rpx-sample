@@ -12,16 +12,16 @@ class CommentsController < ApplicationController
   end
   
   def new
-	@article = Article.find(params[:article_id])
+    @article = Article.find(params[:article_id])
     @comment = Comment.new
-	@comment.article = @article
+    @comment.article = @article
   end
   
   def create
     @article = Article.find(params[:article_id])
     @comment = Comment.new(params[:comment])
-	@comment.article = @article
-	@comment.user = current_user
+    @comment.article = @article
+    @comment.user = current_user
     if @comment.save
       flash[:notice] = "Successfully created comment."
       redirect_to article_path(@article)
