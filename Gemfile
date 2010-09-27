@@ -9,6 +9,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'authlogic', '= 2.1.6'
 gem 'rpx_now', '= 0.6.23'
+gem 'authlogic_rpx', '= 1.2.0'
 
 
 # Use unicorn as the web server

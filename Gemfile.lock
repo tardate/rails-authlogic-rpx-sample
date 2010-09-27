@@ -32,6 +32,9 @@ GEM
       activesupport (~> 3.0.0)
     authlogic (2.1.6)
       activesupport
+    authlogic_rpx (1.2.0)
+      authlogic (= 2.1.6)
+      rpx_now (= 0.6.23)
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -75,6 +78,7 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic (= 2.1.6)
+  authlogic_rpx (= 1.2.0)
   rails (= 3.0.0)
   rpx_now (= 0.6.23)
   sqlite3-ruby

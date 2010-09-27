@@ -1,5 +1,5 @@
-$LOAD_PATH << '~/MyGithub/authlogic_rpx/lib'
-require 'authlogic_rpx'
+#$LOAD_PATH << '~/MyGithub/authlogic_rpx/lib'
+#require 'authlogic_rpx'
 
 RPX_API_KEY = ENV['RARS_RPX_API_KEY']
 RPX_APP_NAME = ENV['RARS_RPX_APP_NAME']
